@@ -38,7 +38,7 @@ module Gitlab
 
             user = model.build_user(opts, as: :admin)
             user.skip_confirmation!
-
+          end
           # Services like twitter and github does not return email via oauth
           # In this case we generate temporary email and force user to fill it later
           if user.email.blank?
