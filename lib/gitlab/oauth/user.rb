@@ -57,11 +57,8 @@ module Gitlab
           if Gitlab.config.omniauth['block_auto_created_users'] && !ldap?
             user.block
           end
+          user
         end
-
-      end
-      user
-    end
 
     private
 
