@@ -1,15 +1,14 @@
+# Web hooks
+
 Project web hooks allow you to trigger an URL if new code is pushed or a new issue is created.
 
----
+You can configure web hooks to listen for specific events like pushes, issues or merge requests. GitLab will send a POST request with data to the web hook URL.
 
-You can configure web hooks to listen for specific events like pushes, issues or merge requests.
-GitLab will send a POST request with data to the web hook URL.
 Web hooks can be used to update an external issue tracker, trigger CI builds, update a backup mirror, or even deploy to your production server.
+
 If you send a web hook to an SSL endpoint [the certificate will not be verified](https://gitlab.com/gitlab-org/gitlab-ce/blob/ccd617e58ea71c42b6b073e692447d0fe3c00be6/app/models/web_hook.rb#L35) since many people use self-signed certificates.
 
----
-
-#### Push events
+## Push events
 
 Triggered when you push to the repository except when pushing tags.
 
@@ -55,7 +54,7 @@ Triggered when you push to the repository except when pushing tags.
 }
 ```
 
-#### Issues events
+## Issues events
 
 Triggered when a new issue is created or an existing issue was updated/closed/reopened.
 
@@ -77,12 +76,14 @@ Triggered when a new issue is created or an existing issue was updated/closed/re
     "description": "Create new API for manipulations with repository",
     "milestone_id": null,
     "state": "opened",
-    "iid": 23
+    "iid": 23,
+    "url": "http://example.com/diaspora/issues/23",
+    "action": "open"
   }
 }
 ```
 
-#### Merge request events
+## Merge request events
 
 Triggered when a new merge request is created or an existing merge request was updated/merged/closed.
 
@@ -108,7 +109,31 @@ Triggered when a new merge request is created or an existing merge request was u
     "merge_status": "unchecked",
     "target_project_id": 14,
     "iid": 1,
-    "description": ""
+    "description": "",
+    "source": {
+      "name": "awesome_project",
+      "ssh_url": "ssh://git@example.com/awesome_space/awesome_project.git",
+      "http_url": "http://example.com/awesome_space/awesome_project.git",
+      "visibility_level": 20,
+      "namespace": "awesome_space"
+    },
+    "target": {
+      "name": "awesome_project",
+      "ssh_url": "ssh://git@example.com/awesome_space/awesome_project.git",
+      "http_url": "http://example.com/awesome_space/awesome_project.git",
+      "visibility_level": 20,
+      "namespace": "awesome_space"
+    },
+    "last_commit": {
+      "id": "da1560886d4f094c3e6c9ef40349f7d38b5d27d7",
+      "message": "fixed readme",
+      "timestamp": "2012-01-03T23:36:29+02:00",
+      "url": "http://example.com/awesome_space/awesome_project/commits/da1560886d4f094c3e6c9ef40349f7d38b5d27d7",
+      "author": {
+        "name": "GitLab dev user",
+        "email": "gitlabdev@dv6700.(none)"
+      }
+    }
   }
 }
 ```
@@ -123,12 +148,14 @@ Save the following file as `print_http_body.rb`.
 ```ruby
 require 'webrick'
 
-server = WEBrick::HTTPServer.new(Port: ARGV.first)
+server = WEBrick::HTTPServer.new(:Port => ARGV.first)
 server.mount_proc '/' do |req, res|
   puts req.body
 end
 
-trap 'INT' do server.shutdown end
+trap 'INT' do 
+  server.shutdown 
+end
 server.start
 ```
 

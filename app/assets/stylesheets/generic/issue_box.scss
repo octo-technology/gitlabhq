@@ -8,61 +8,52 @@
  */
 
 .issue-box {
-  color: #666;
+  color: #555;
   margin:20px 0;
-  background: #FFF;
-  border: 1px solid #EEE;
-  @include box-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+  background: $box_bg;
+  @include box-shadow(0 1px 1px rgba(0, 0, 0, 0.09));
 
   &.issue-box-closed {
-    border-color: $border_danger;
     .state {
-      background-color: $bg_light_danger;
+      background-color: #F3CECE;
       border-color: $border_danger;
-      color: $color_danger;
-      .state-label {
-        background-color: $bg_danger;
-        color: #FFF;
-      }
+    }
+    .state-label {
+      background-color: $bg_danger;
+      color: #FFF;
     }
   }
 
   &.issue-box-merged {
-    border-color: $border_primary;
     .state {
-      background-color: $bg_light_primary;
+      background-color: #B7CEE7;
       border-color: $border_primary;
-      color: $color_primary;
-      .state-label {
-        background-color: $bg_primary;
-        color: #FFF;
-      }
+    }
+    .state-label {
+      background-color: $bg_primary;
+      color: #FFF;
     }
   }
 
   &.issue-box-open {
-    border-color: $border_success;
     .state {
-      background-color: $bg_light_success;
-      border-color: $border_success;
-      color: $color_success;
-      .state-label {
-        background-color: $bg_success;
-        color: #FFF;
-      }
+      background-color: #D6F1D7;
+      border-color: $bg_success;
+    }
+    .state-label {
+      background-color: $bg_success;
+      color: #FFF;
     }
   }
 
   &.issue-box-expired {
-    border-color: #cea61b;
     .state {
-      background-color: #fcf8e3;
+      background-color: #EEE9B3;
       border-color: #faebcc;
-      color: #8a6d3b;
-      .state-label {
-        background: #cea61b;
-        color: #FFF;
-      }
+    }
+    .state-label {
+      background: #cea61b;
+      color: #FFF;
     }
   }
 
@@ -71,24 +62,22 @@
   }
 
   .state {
-    border-bottom: 1px solid #DDD;
-    line-height: 32px;
+    background-color: #f9f9f9;
   }
 
   .title {
-    font-size: 22px;
-    font-weight: 500;
+    font-size: 28px;
+    font-weight: normal;
     line-height: 1.5;
     margin: 0;
     color: #333;
-    padding-bottom: 0;
-    padding: 15px 25px;
+    padding: 10px 15px;
   }
 
   .context {
     border: none;
     border-top: 1px solid #eee;
-    padding: 15px 25px;
+    padding: 10px 15px;
 
     // Reset text align for children
     .text-right > * { text-align: left; }
@@ -104,7 +93,11 @@
   }
 
   .description {
-    padding: 0 25px 15px 25px;
+    padding: 0 15px 10px 15px;
+
+    code {
+      white-space: pre-wrap;
+    }
   }
 
   .title, .context, .description {
@@ -115,14 +108,16 @@
 
   .state-label {
     font-size: 14px;
-    padding: 1px 25px;
-    text-align: center;
-    text-shadow: none;
-    display: inline-block;
-    line-height: 34px;
+    float: left;
+    font-weight: bold;
+    padding: 10px 15px;
   }
 
   .creator {
-    padding: 2px 15px;
+    float: right;
+    padding: 10px 15px;
+    a {
+      text-decoration: underline;
+    }
   }
 }

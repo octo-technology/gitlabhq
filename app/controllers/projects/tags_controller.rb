@@ -13,13 +13,15 @@ class Projects::TagsController < Projects::ApplicationController
   end
 
   def create
-    @repository.add_tag(params[:tag_name], params[:ref])
-
-    if new_tag = @repository.find_tag(params[:tag_name])
-      Event.create_ref_event(@project, current_user, new_tag, 'add', 'refs/tags')
+    result = CreateTagService.new(@project, current_user).
+      execute(params[:tag_name], params[:ref], params[:message])
+    if result[:status] == :success
+      @tag = result[:tag]
+      redirect_to project_tags_path(@project)
+    else
+      @error = result[:message]
+      render action: 'new'
     end
-
-    redirect_to project_tags_path(@project)
   end
 
   def destroy
@@ -31,7 +33,7 @@ class Projects::TagsController < Projects::ApplicationController
 
     respond_to do |format|
       format.html { redirect_to project_tags_path }
-      format.js { render nothing: true }
+      format.js
     end
   end
 end

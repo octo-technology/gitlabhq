@@ -1,6 +1,6 @@
 
-/**
- * MR -> show: Automerge widget
+  /**
+   * MR -> show: Automerge widget
  *
  */
 .automerge_widget {
@@ -19,12 +19,17 @@
   }
 }
 
-.merge-request .nav-tabs{
+.merge-request .merge-request-tabs{
+  border-bottom: 2px solid $border_primary;
+  margin: 20px 0;
+
   li {
     a {
-      font-weight: bold;
-      padding: 8px 20px;
-      text-align: center;
+      padding: 15px 40px;
+      font-size: 14px;
+      margin-bottom: -2px;
+      border-bottom: 2px solid $border_primary;
+      @include border-radius(0px);
     }
   }
 }
@@ -43,10 +48,10 @@
 
 .label-branch {
   @include border-radius(4px);
-  padding: 2px 4px;
+  padding: 3px 4px;
   border: none;
-  background: #555;
-  color: #fff;
+  background: $hover;
+  color: #333;
   font-family: $monospace_font;
   font-weight: normal;
   overflow: hidden;
@@ -63,7 +68,7 @@
 
 .mr-list {
   .merge-request {
-    padding: 10px;
+    padding: 10px 15px;
     position: relative;
 
     .merge-request-title {
@@ -99,23 +104,69 @@
 }
 
 .mr-state-widget {
-  @include border-radius(0px);
+  background: $box_bg;
+  margin-bottom: 20px;
+  @include box-shadow(0 1px 1px rgba(0, 0, 0, 0.09));
 
-  .panel-heading {
-    @include border-radius(0px);
+  .ci_widget {
+    padding: 10px 15px;
+    font-size: 15px;
+    border-bottom: 1px solid #BBB;
+    color: #777;
+
+    &.ci-success {
+      color: $bg_success;
+      border-color: $border_success;
+    }
+
+    &.ci-pending {
+      color: #548;
+      border-color: #548;
+    }
+
+    &.ci-running {
+      color: $bg_warning;
+      border-color: $border_warning;
+    }
+
+    &.ci-failed {
+      color: $bg_danger;
+      border-color: $border_danger;
+    }
+
+    &.ci-error {
+      color: $bg_danger;
+      border-color: $border_danger;
+    }
   }
 
-  .panel-body {
+  .mr-widget-body {
+    padding: 10px 15px;
+
     h4 {
-      margin-top: 0px;
+      font-size: 20px;
+      font-weight: normal;
     }
 
     p:last-child {
       margin-bottom: 0;
     }
   }
+
+  .mr-widget-footer {
+    padding: 10px 15px;
+    border-top: 1px solid #EEE;
+  }
+
+  .ci-coverage {
+    float: right;
+  }
 }
 
 .merge-request-show-labels .label {
   padding: 6px 10px;
+}
+
+.mr-commits .commit {
+  padding: 10px 15px;
 }

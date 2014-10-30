@@ -4,7 +4,7 @@
   .issues-filters
     .dropdown.inline
       %a.dropdown-toggle.btn{href: '#', "data-toggle" => "dropdown"}
-        %i.icon-user
+        %i.fa.fa-user
         %span.light assignee:
         - if @assignee.present?
           %strong= @assignee.name
@@ -27,7 +27,7 @@
 
     .dropdown.inline.prepend-left-10
       %a.dropdown-toggle.btn{href: '#', "data-toggle" => "dropdown"}
-        %i.icon-time
+        %i.fa.fa-clock-o
         %span.light milestone:
         - if @milestone.present?
           %strong= @milestone.title
@@ -61,7 +61,7 @@
         = hidden_field_tag :status, params[:status]
         = button_tag "Update issues", class: "btn update_selected_issues btn-save"
 
-.ui-box
+.panel.panel-default
   %ul.well-list.issues-list
     = render @issues
     - if @issues.blank?

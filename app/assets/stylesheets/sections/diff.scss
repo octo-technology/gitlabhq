@@ -11,7 +11,6 @@
 
     > span {
       font-family: $monospace_font;
-      font-size: 14px;
       line-height: 2;
     }
 
@@ -19,9 +18,7 @@
       float: right;
 
       .btn {
-        background-color: #EEE;
-        color: #666;
-        font-weight: bolder;
+        background-color: #FFF;
       }
     }
 
@@ -32,6 +29,7 @@
 
     .file-mode {
       font-family: $monospace_font;
+      margin-left: 10px;
     }
   }
   .diff-content {
@@ -42,13 +40,21 @@
     font-size: 12px;
     .old {
       span.idiff {
-        background-color: #FAA;
+        background-color: #F99;
       }
     }
     .new {
       span.idiff {
-        background-color: #AFA;
+        background-color: #8F8;
       }
+    }
+    .unfold {
+      cursor: pointer;
+    }
+
+    .file-mode-changed {
+      padding: 10px;
+      color: #777;
     }
 
     table {
@@ -119,8 +125,6 @@
     }
     .line_content {
       display: block;
-      white-space: pre;
-      height: 18px;
       margin: 0px;
       padding: 0px 0.5em;
       border: none;
@@ -330,3 +334,17 @@
     }
   }
 }
+
+.file-content .diff-file {
+  margin: 0;
+  border: none;
+}
+
+.diff-file .line_content {
+  white-space: pre;
+}
+
+.diff-wrap-lines .line_content {
+  white-space: pre-wrap;
+}
+
