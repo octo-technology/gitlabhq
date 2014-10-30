@@ -98,10 +98,10 @@ gem 'asciidoctor', '= 0.1.4'
 gem 'diffy', '~> 3.0.3'
 
 # Application server
-group :unicorn do
+#group :unicorn do
   gem "unicorn", '~> 4.6.3'
   gem 'unicorn-worker-killer'
-end
+#end # UGLY FIX
 
 # State machine
 gem "state_machine"
